@@ -1,5 +1,11 @@
 pyvenv.cfg
-Include/
-Lib/
-Scripts/
+include/
+lib/
+scripts/
+bin/
+lib64/
 *.env
+piper/
+voice.mp3
+__pycache__
+*.vscode

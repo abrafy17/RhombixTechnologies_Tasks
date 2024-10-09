@@ -1,0 +1,8 @@
+SpeechRecognition
+gtts
+datetime
+microsoft-bing-websearch
+youtube-search2
+playsound
+pyaudio
+pygobject
