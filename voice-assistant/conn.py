@@ -20,6 +20,7 @@ def setup_database():
 
 def add_names(conn, user_name, bot_name):
     cursor = conn.cursor()
+    cursor.execute('DELETE FROM names')
     cursor.execute('INSERT INTO names (user_name, bot_name) VALUES (?, ?)', (user_name, bot_name))
     conn.commit()
 

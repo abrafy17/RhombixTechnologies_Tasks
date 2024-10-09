@@ -9,6 +9,11 @@ from text_to_speech import Speak
 conn = setup_database()
 user_name = get_user_name(conn)
 bot_name = get_assistant_name(conn)
+if bot_name:
+    bot_name = bot_name[0] 
+else:
+    bot_name = "Assistant"
+print(f"Hello My Name is {bot_name}, Say 'Hey {bot_name}' for Assistance :)")
 
 speaker = Speak()
 media_controller = MediaController()
@@ -25,10 +30,13 @@ def get_audio():
             print(f"You said: {said}")
         except sr.UnknownValueError:
             print("Sorry, I could not understand the audio.")
+            return ""
         except sr.RequestError as e:
             print(f"Could not request results; {e}")
+            return ""
         except Exception as e:
             print("Exception: " + str(e))
+            return ""
             
     return said.lower()  
 
@@ -91,45 +99,56 @@ if __name__ == "__main__":
         speaker.speak(f"Hey {user_name} you set my name to {bot_name}")
         add_names(conn, user_name, bot_name)
         
-    speaker.speak(f"Hello {user_name}, How can I help you?")
     
     while True:
         command = get_audio()
-
-        if "my name" in command:
-            speaker.speak(f"Your name is {user_name}")
-            
-        if "your name" in command:
-            speaker.speak(f"My Name is {bot_name}")
-            
-        if "play" in command or "pasue" in command:
-            media_controller.play_pause()
-            
-        if "next track" in command:
-            media_controller.next_track()
-            
-        if "previous track" in command:
-            media_controller.previous_track()
-            
-        if "time" in command:
-            get_time()
+        print("Standing By...")
         
-        if "date" in command:
-            get_date()
+        if command:
+            WAKE_STR = ["hey", "hello", "hi", bot_name]
+            if any(wake in command for wake in WAKE_STR):
+                speaker.speak(f"Hey {user_name}, What Can I help you with?")
+                command = get_audio()
+                
+                if "my name" in command:
+                    speaker.speak(f"Your name is {user_name}")
+                    
+                elif "your name" in command:
+                    speaker.speak(f"My Name is {bot_name}")
+                    
+                elif "play" in command or "pause" in command:
+                    media_controller.play_pause()
+                    
+                elif "next track" in command:
+                    media_controller.next_track()
+                    
+                elif "previous track" in command:
+                    media_controller.previous_track()
+                    
+                elif "time" in command:
+                    get_time()
+                
+                elif "date" in command:
+                    get_date()
 
-        if "search" in command:
-            if "youtube" in command:
-                search(command, 'youtube')
-            else:
-                search(command, 'google')
-        
-        if "open" in command:
-            app_name = command.replace("open", "").strip()
-            get_app(app_name)
-            
-        if "quit" in command or "exit" in command:
-            speaker.speak(f"Goodbye {user_name}")
-            exit()
-
+                elif "search" in command:
+                    if "youtube" in command:
+                        search(command, 'youtube')
+                    else:
+                        search(command, 'google')
+                
+                elif "open" in command:
+                    app_name = command.replace("open", "").strip()
+                    get_app(app_name)
+                    
+                elif "quit" in command or "exit" in command:
+                    speaker.speak(f"Goodbye {user_name}")
+                    exit()
+                
+                else:
+                    speaker.speak("Can't help with this right now")
+                    print("Can't help with this right now")
+        else:
+            print(f"Say 'hey {bot_name}' for Assistance")
 
 conn.close()
