@@ -9,3 +9,4 @@ piper/
 voice.mp3
 __pycache__
 *.vscode
+test.py

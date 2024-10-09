@@ -1,15 +1,17 @@
 import speech_recognition as sr
 import webbrowser 
 import datetime
-from gtts import gTTS
-import os
 import subprocess
-import playsound
 from conn import get_user_name, get_assistant_name, add_names, setup_database
+from player_control import MediaController
+from text_to_speech import Speak
 
 conn = setup_database()
 user_name = get_user_name(conn)
 bot_name = get_assistant_name(conn)
+
+speaker = Speak()
+media_controller = MediaController()
 
 def get_audio():
     speech = sr.Recognizer()
@@ -30,28 +32,22 @@ def get_audio():
             
     return said.lower()  
 
-def speak(text):
-    tts = gTTS(text=text, lang='en')
-    filename = 'voice.mp3'
-    tts.save(filename)
-    playsound.playsound(filename)
-
 def get_time():
     now = datetime.datetime.now()
     current_time = now.strftime("%H:%M %p")
-    speak(f"The current time is {current_time}")
+    speaker.speak(f"The current time is {current_time}")
     print(current_time)
     
 def get_date():
     now = datetime.datetime.now()
     current_date = now.strftime("%d %B %Y")
-    speak(f"Today's date is {current_date}")
+    speaker.speak(f"Today's date is {current_date}")
     print(current_date)
 
 def search(command, platform):
     command = command.replace('search', '').strip()
     if not command:
-        speak("Please try again...")
+        speaker.speak("Please try again...")
         print("Invalid command.")
         return
 
@@ -60,7 +56,7 @@ def search(command, platform):
         command = command.replace(' ', '+')
         url = f"https://www.google.com/search?q={command}"
         webbrowser.open(url)
-        speak(f"Searching {query} on Google.")
+        speaker.speak(f"Searching {query} on Google.")
         print(f"Searching {command} on Google.")
         
     elif platform == 'youtube':
@@ -68,7 +64,7 @@ def search(command, platform):
         command = command.replace(' ', '+')
         url = f"https://www.youtube.com/results?search_query={command}"
         webbrowser.open(url)
-        speak(f"Searching {query} on YouTube.")
+        speaker.speak(f"Searching {query} on YouTube.")
         print(f"Searching {command} on YouTube.")
 
 def get_app(app_name):
@@ -81,30 +77,39 @@ def get_app(app_name):
     
     if app_name in app_commands:
         subprocess.Popen([app_commands[app_name]])
-        speak(f"Opening {app_name}")
+        speaker.speak(f"Opening {app_name}")
         print(f"Opening {app_name}.")
     else:
         print("Application not recognized.")
 
 if __name__ == "__main__":
     if not user_name:
-        speak("Welcome for the First time, What is your name?")
+        speaker.speak("Welcome for the First time, What is your name?")
         user_name = input("Enter Your Name\n> ")
-        speak("What would you like to call me?")
+        speaker.speak("What would you like to call me?")
         bot_name = input("Enter the Assistant Name\n> ")
-        speak(f"Hey {user_name} you set my name to {bot_name}")
+        speaker.speak(f"Hey {user_name} you set my name to {bot_name}")
         add_names(conn, user_name, bot_name)
         
-    speak(f"Hello {user_name}, How can I help you?")
+    speaker.speak(f"Hello {user_name}, How can I help you?")
     
     while True:
         command = get_audio()
 
         if "my name" in command:
-            speak(f"Your name is {user_name}")
+            speaker.speak(f"Your name is {user_name}")
             
         if "your name" in command:
-            speak(f"My Name is {bot_name}")
+            speaker.speak(f"My Name is {bot_name}")
+            
+        if "play" in command or "pasue" in command:
+            media_controller.play_pause()
+            
+        if "next track" in command:
+            media_controller.next_track()
+            
+        if "previous track" in command:
+            media_controller.previous_track()
             
         if "time" in command:
             get_time()
@@ -123,7 +128,7 @@ if __name__ == "__main__":
             get_app(app_name)
             
         if "quit" in command or "exit" in command:
-            speak(f"Goodbye {user_name}")
+            speaker.speak(f"Goodbye {user_name}")
             exit()
 
 
