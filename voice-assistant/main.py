@@ -90,6 +90,20 @@ def get_app(app_name):
     else:
         print("Application not recognized.")
 
+def change_user_name(conn, bot_name):
+    speaker.speak("What would you like me to call you?")
+    new_user_name = input("Enter You Name:\n> ")
+    add_names(conn, new_user_name, bot_name)
+    print(f"User name is set to {new_user_name}")
+    return new_user_name
+    
+def change_bot_name(conn, user_name):
+    speaker.speak("What you want to call me?")
+    new_bot_name = input("Enter New Name:\n> ")
+    add_names(conn, user_name, new_bot_name)
+    print(f"Assistant name is changed to {new_bot_name}")
+    return new_bot_name
+    
 if __name__ == "__main__":
     if not user_name:
         speaker.speak("Welcome for the First time, What is your name?")
@@ -105,16 +119,22 @@ if __name__ == "__main__":
         print("Standing By...")
         
         if command:
-            WAKE_STR = ["hey", "hello", "hi", bot_name]
+            WAKE_STR = ["hey", "hello", "hi", "listen", "Wakeup", bot_name]
             if any(wake in command for wake in WAKE_STR):
                 speaker.speak(f"Hey {user_name}, What Can I help you with?")
                 command = get_audio()
                 
-                if "my name" in command:
+                if "my name" in command and "change" not in command:
                     speaker.speak(f"Your name is {user_name}")
                     
-                elif "your name" in command:
+                elif "your name" in command and "change" not in command:
                     speaker.speak(f"My Name is {bot_name}")
+                    
+                elif "change my name" in command:
+                    user_name = change_user_name(conn, bot_name)
+                    
+                elif "change you name" in command:
+                    bot_name = change_bot_name(conn, user_name)
                     
                 elif "play" in command or "pause" in command:
                     media_controller.play_pause()
@@ -140,15 +160,14 @@ if __name__ == "__main__":
                 elif "open" in command:
                     app_name = command.replace("open", "").strip()
                     get_app(app_name)
-                    
-                elif "quit" in command or "exit" in command:
-                    speaker.speak(f"Goodbye {user_name}")
-                    exit()
                 
                 else:
                     speaker.speak("Can't help with this right now")
                     print("Can't help with this right now")
         else:
             print(f"Say 'hey {bot_name}' for Assistance")
+            if "quit" in command or "exit" in command:
+                    speaker.speak(f"Goodbye {user_name}")
+                    exit()
 
 conn.close()
