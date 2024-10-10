@@ -1,6 +1,7 @@
 import speech_recognition as sr
 import webbrowser 
 import datetime
+import os
 import subprocess
 from conn import get_user_name, get_assistant_name, add_names, setup_database
 from player_control import MediaController
@@ -17,6 +18,12 @@ print(f"Hello My Name is {bot_name}, Say 'Hey {bot_name}' for Assistance :)")
 
 speaker = Speak()
 media_controller = MediaController()
+
+def clr_scr():
+    if os.name == 'nt':
+        os.system("cls")
+    else: 
+        os.system("clear")
 
 def get_audio():
     speech = sr.Recognizer()
@@ -115,13 +122,14 @@ if __name__ == "__main__":
         
     
     while True:
-        command = get_audio()
+        clr_scr()
         print("Standing By...")
+        command = get_audio()
         
         if command:
-            WAKE_STR = ["hey", "hello", "hi", "listen", "Wakeup", bot_name]
+            WAKE_STR = ["hey", "hello", "hi", "listen", "wake up", bot_name]
             if any(wake in command for wake in WAKE_STR):
-                speaker.speak(f"Hey {user_name}, What Can I help you with?")
+                speaker.speak(f"I am listening")
                 command = get_audio()
                 
                 if "my name" in command and "change" not in command:
@@ -133,7 +141,7 @@ if __name__ == "__main__":
                 elif "change my name" in command:
                     user_name = change_user_name(conn, bot_name)
                     
-                elif "change you name" in command:
+                elif "change your name" in command:
                     bot_name = change_bot_name(conn, user_name)
                     
                 elif "play" in command or "pause" in command:
