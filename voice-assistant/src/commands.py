@@ -8,6 +8,7 @@ from src.time_date import TimeDate
 from src.applications import Applications
 from src.weather import Weather
 from src.names import Names
+from src.roll_a_dice import Roll
 
 class Commands():
     def __init__(self):
@@ -18,6 +19,7 @@ class Commands():
         self.apps = Applications()
         self.time_date = TimeDate()
         self.weather = Weather()
+        self.roll = Roll()
         
     def clr_scr(self):
         if os.name == 'nt':
@@ -70,6 +72,9 @@ class Commands():
                         
         elif "previous track" in command:
             self.media_controller.previous_track()
+            
+        elif "roll a dice" in command:
+            self.roll.dice()
                         
         elif "time" in command:
             self.time_date.get_time()
