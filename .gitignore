@@ -6,7 +6,8 @@ bin/
 lib64/
 *.env
 piper/
-voice.mp3
+*.mp3
+*.wav
 __pycache__
 *.vscode
 test.py

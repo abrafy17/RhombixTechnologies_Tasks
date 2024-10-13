@@ -2,7 +2,7 @@ from gtts import gTTS
 import playsound
 
 class Speak:
-    def __init__(self, filename='voice.mp3'):
+    def __init__(self, filename='voice.wav'):
         self.filename = filename
         
     def speak(self, text):

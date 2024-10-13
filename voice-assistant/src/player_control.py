@@ -1,5 +1,5 @@
 import subprocess
-from text_to_speech import Speak
+from src.text_to_speech import Speak
 
 class MediaController():
     def __init__(self):
@@ -18,7 +18,7 @@ class MediaController():
         
     def next_track(self):
         subprocess.run(["playerctl", "next"])
-        self.speaker.speak("Pskipping to next track")
+        self.speaker.speak("skipping to next track")
         print("Skipping to next track")
         
     def previous_track(self):
