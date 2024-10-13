@@ -1,8 +1,8 @@
 # Voice Assistant
 A voice assistant to help you with basic tasks like:
-- Searching YouTube or Google
+- Searching Google, Wikipedia and YouTube
 - Time and Date
 - Opening Apps**
-- Media Controls**
+- Controlling Media**
 
 > ** works only on linux
