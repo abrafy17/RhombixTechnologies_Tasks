@@ -75,6 +75,9 @@ class Commands():
             
         elif "roll a dice" in command:
             self.roll.dice()
+            
+        elif "choose between" in command:
+            self.roll.choice(command)
                         
         elif "time" in command:
             self.time_date.get_time()
