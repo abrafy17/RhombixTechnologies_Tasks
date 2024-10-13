@@ -12,3 +12,5 @@ __pycache__
 *.vscode
 test.py
 data.db
+config.ini
+ENV_VAR.py

@@ -6,6 +6,7 @@ from src.player_control import MediaController
 from src.text_to_speech import Speak
 from src.time_date import TimeDate
 from src.applications import Applications
+from src.weather import Weather
 from src.names import Names
 
 class Commands():
@@ -16,6 +17,7 @@ class Commands():
         self.names = Names()
         self.apps = Applications()
         self.time_date = TimeDate()
+        self.weather = Weather()
         
     def clr_scr(self):
         if os.name == 'nt':
@@ -26,7 +28,7 @@ class Commands():
     def get_audio(self):
         speech = sr.Recognizer()
         with sr.Microphone() as source:
-            print("Listening...")
+            print("Listening")
             audio = speech.listen(source)
             said = ""
             
@@ -88,6 +90,9 @@ class Commands():
         elif "open" in command:
             app_name = command.replace("open", "").strip()
             self.apps.get_app(app_name)
+            
+        elif "weather" in command:
+            self.weather.get_weather(command)
                     
         elif " quit" in command or "exit" in command:
             self.speaker.speak(f"Goodbye {self.names.user_name()}")
