@@ -17,7 +17,7 @@ class Names():
         
     def change_user_name(self):
         self.speaker.speak("What would you like me to call you?")
-        new_user_name = input("Enter You Name:\n> ")
+        new_user_name = input("Enter Your Name:\n> ")
         bot_name = self.assistant_name()
         self.database.add_names(self.conn, new_user_name, bot_name)
         self.speaker.speak(f"You name is {new_user_name}")
