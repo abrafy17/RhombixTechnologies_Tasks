@@ -28,7 +28,7 @@ class Commands():
     def get_audio(self):
         speech = sr.Recognizer()
         with sr.Microphone() as source:
-            print("Listening")
+            print("Listening...")
             audio = speech.listen(source)
             said = ""
             

@@ -13,10 +13,9 @@ class Weather():
     def get_weather(self, command):
         command = command.replace('current', '').replace('weather', '').replace('in', '').strip()
         command = command.replace(' ', '+')
-        print(command)
         city = command
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={self.token}"
-        print(url)
+        print(f"Looking up the weather of {city}")
         res = requests.get(url)
         weather = res.json()
         
@@ -43,5 +42,3 @@ class Weather():
         
         self.speaker.speak(f"Current weather at {city} {country} is {tempurature:.1f}degrees celsius with {description}")
         print(f"Current weather at {city} {country} is {tempurature:.1f}degrees Celsius with {description}")
-    
-
