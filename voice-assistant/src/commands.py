@@ -1,6 +1,6 @@
 import speech_recognition as sr
 import os
-import sys
+from sys import exit
 from src.search_engine import Query
 from src.player_control import MediaController
 from src.text_to_speech import Speak
@@ -9,6 +9,7 @@ from src.applications import Applications
 from src.weather import Weather
 from src.names import Names
 from src.roll_a_dice import Roll
+from src.music import Play
 
 class Commands():
     def __init__(self):
@@ -20,6 +21,7 @@ class Commands():
         self.time_date = TimeDate()
         self.weather = Weather()
         self.roll = Roll()
+        self.play = Play()
         
     def clr_scr(self):
         if os.name == 'nt':
@@ -64,7 +66,7 @@ class Commands():
         elif "change your name" in command:
             self.names.change_bot_name()
                         
-        elif "play" in command or "pause" in command:
+        elif "play" in command and "pause" in command and "music" not in command:
             self.media_controller.play_pause()
                         
         elif "next track" in command:
@@ -72,6 +74,9 @@ class Commands():
                         
         elif "previous track" in command:
             self.media_controller.previous_track()
+            
+        elif "play music" in command or "music" in command:
+            self.play.Music(command)
             
         elif "roll a dice" in command:
             self.roll.dice()
@@ -104,7 +109,7 @@ class Commands():
                     
         elif " quit" in command or "exit" in command:
             self.speaker.speak(f"Goodbye {self.names.user_name()}")
-            sys.exit()
+            exit()
         
         else:
             self.speaker.speak("Can't help with this right now")

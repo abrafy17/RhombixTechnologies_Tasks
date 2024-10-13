@@ -6,3 +6,4 @@ playsound
 pyaudio
 pygobject
 wikipedia
+ytmusicapi
