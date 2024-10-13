@@ -50,54 +50,56 @@ class Commands():
     def parse_commands(self, command):
         if "my name" in command and "change" not in command:
             self.speaker.speak(f"Your name is {self.names.user_name()}")
-                    
+                        
         elif "your name" in command and "change" not in command:
             self.speaker.speak(f"My Name is {self.names.assistant_name()}")
-                    
+                        
         elif "change my name" in command:
             self.names.change_user_name()
-                    
+                        
         elif "change your name" in command:
             self.names.change_bot_name()
-                    
+                        
         elif "play" in command or "pause" in command:
             self.media_controller.play_pause()
-                    
+                        
         elif "next track" in command:
-            self.media_controller.next_track()
-                    
+                self.media_controller.next_track()
+                        
         elif "previous track" in command:
             self.media_controller.previous_track()
-                    
+                        
         elif "time" in command:
             self.time_date.get_time()
-                
+                    
         elif "date" in command:
             self.time_date.get_date()
 
         elif "search" in command:
             if "youtube" in command:
                 self.query.search(command, 'youtube')
-                
+                    
             elif "wikipedia" in command:
                 self.query.search(command, 'wikipedia')
-                
+                    
             else:
                 self.query.search(command, 'google')
-                
+                    
         elif "open" in command:
             app_name = command.replace("open", "").strip()
             self.apps.get_app(app_name)
-                
+                    
         elif " quit" in command or "exit" in command:
             self.speaker.speak(f"Goodbye {self.names.user_name()}")
             sys.exit()
-    
+        
         else:
             self.speaker.speak("Can't help with this right now")
             print("Can't help with this right now")
     
     def commands(self):
+        if self.names.user_name() == None:
+                self.names.empty_user_name()
         while True:
             command = self.get_audio()
             if command:

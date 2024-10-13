@@ -11,3 +11,4 @@ piper/
 __pycache__
 *.vscode
 test.py
+data.db

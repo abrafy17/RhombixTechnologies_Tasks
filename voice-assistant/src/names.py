@@ -34,10 +34,9 @@ class Names():
         return new_bot_name
     
     def empty_user_name(self):
-        if not self.user_name:
-            self.speaker.speak("Welcome for the First time, What is your name?")
-            user_name = input("Enter Your Name\n> ")
-            self.speaker.speak("What would you like to call me?")
-            bot_name = input("Enter the Assistant Name\n> ")
-            self.speaker.speak(f"Hey {user_name} you set my name to {bot_name}")
-            self.add_names(self.conn, user_name, bot_name)
+        self.speaker.speak("Welcome for the First time, What is your name?")
+        user_name = input("Enter Your Name\n> ")
+        self.speaker.speak("What would you like to call me?")
+        bot_name = input("Enter the Assistant Name\n> ")
+        self.speaker.speak(f"Hey {user_name} you set my name to {bot_name}")
+        self.database.add_names(self.conn, user_name, bot_name)
