@@ -66,7 +66,7 @@ class Commands():
         elif "change your name" in command:
             self.names.change_bot_name()
                         
-        elif "play" in command and "pause" in command and "music" not in command:
+        elif "resume" in command or "pause" in command:
             self.media_controller.play_pause()
                         
         elif "next track" in command:
@@ -75,7 +75,7 @@ class Commands():
         elif "previous track" in command:
             self.media_controller.previous_track()
             
-        elif "play music" in command or "music" in command:
+        elif "play" in command or "music" in command:
             self.play.Music(command)
             
         elif "roll a dice" in command:

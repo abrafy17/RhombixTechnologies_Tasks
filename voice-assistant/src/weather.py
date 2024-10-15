@@ -40,5 +40,5 @@ class Weather():
         city = weather["name"]
         country = weather['sys']['country']
         
-        self.speaker.speak(f"Current weather at {city} {country} is {tempurature:.1f}degrees celsius with {description}")
         print(f"Current weather at {city} {country} is {tempurature:.1f}degrees Celsius with {description}")
+        self.speaker.speak(f"Current weather at {city} {country} is {tempurature:.1f}degrees celsius with {description}")
