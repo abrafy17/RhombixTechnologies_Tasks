@@ -4,7 +4,7 @@ A voice assistant to help you with basic tasks like:
 - Time and Date
 - Opening Apps**
 - Controlling Media**
-- Play Music from YouTube (requires mpv)
+- Play Music from YouTube (requires mpv & kitty terminal emulator)
 - Get Weather
 - Roll a dice and choose between two options
 
