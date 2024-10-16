@@ -55,9 +55,11 @@ class Commands():
 
     def parse_commands(self, command):
         if "my name" in command and "change" not in command:
+            print(f"Your name is {self.names.user_name()}")
             self.speaker.speak(f"Your name is {self.names.user_name()}")
                         
         elif "your name" in command and "change" not in command:
+            print(f"Your name is {self.names.assistant_name()}")
             self.speaker.speak(f"My Name is {self.names.assistant_name()}")
                         
         elif "change my name" in command:
@@ -80,6 +82,9 @@ class Commands():
             
         elif "roll a dice" in command:
             self.roll.dice()
+            
+        elif "flip a coin" in command:
+            self.roll.coin()
             
         elif "choose between" in command:
             self.roll.choice(command)

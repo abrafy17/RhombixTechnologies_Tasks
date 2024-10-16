@@ -14,22 +14,22 @@ class Query:
             command = query.replace(' ', '+')
             url = f"https://www.google.com/search?q={command}"
             webbrowser.open(url)
-            self.speaker.speak(f"Searching {query} on Google.")
             print(f"Searching {query} on Google.")
+            self.speaker.speak(f"Searching {query} on Google.")
             
         elif platform == 'youtube':
             query = command.replace('youtube', '').strip()
             command = query.replace(' ', '+')
             url = f"https://www.youtube.com/results?search_query={command}"
             webbrowser.open(url)
-            self.speaker.speak(f"Searching {query} on YouTube.")
             print(f"Searching {query} on YouTube.")
+            self.speaker.speak(f"Searching {query} on YouTube.")
             
         elif platform =='wikipedia':
-            query = command.replace('wikipedia', '').strip()
+            query = command.replace('wikipedia', '').replace('on', '').strip()
             self.speaker.speak(f"Searching WikiPedia for {query}")
             print(f"Searching WikiPedia for {query}")
             result = wikipedia.summary(query, sentences=1)
-            self.speaker.speak(result)
             print(result)
+            self.speaker.speak(result)
             

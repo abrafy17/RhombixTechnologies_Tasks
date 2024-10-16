@@ -15,7 +15,7 @@ class Applications():
         
         if app_name in app_commands:
             subprocess.Popen([app_commands[app_name]])
-            self.speaker.speak(f"Opening {app_name}")
             print(f"Opening {app_name}.")
+            self.speaker.speak(f"Opening {app_name}")
         else:
             print("Application not recognized.")

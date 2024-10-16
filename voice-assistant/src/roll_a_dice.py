@@ -7,9 +7,13 @@ class Roll():
         
     def dice(self):
         result = random.randint(1, 6)
-        rolled = f"Rolled Number is {result}"
-        print(rolled)
-        self.speaker.speak(rolled)
+        print(f"Rolled number is: {result}")
+        self.speaker.speak(f"Rolled number is {result}")
+        
+    def coin(self):
+        coinFlip = random.coin(['Heads', 'Tails'])
+        print(f" Coin shows {coinFlip}")
+        self.speaker.speaks(f"Its {coinFlip}")
         
     def choice(self, command):
         command = command.replace('choose', '').replace('between', '').strip()
