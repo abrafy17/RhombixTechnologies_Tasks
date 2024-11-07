@@ -1,6 +1,5 @@
 import pyfiglet
 
-
 class Alerts:
     def title(self, msg):
         text = msg

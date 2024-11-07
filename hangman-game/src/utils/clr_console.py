@@ -7,4 +7,4 @@ def clr_console():
         os.system('clear')
         
 def presstoCont():
-    print("Press any key to contine...")
+    input("Press any key to contine...")

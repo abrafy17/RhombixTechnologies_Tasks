@@ -1,12 +1,11 @@
 from utils.globalVariable import originalWord
 from utils.alerts import Alerts
-from utils.clr_console import clr_console, presstoCont
+from utils.clr_console import clr_console
 import random
 
 class GameSettings:
     def __init__(self):
         self.originalWord = originalWord
-        self.currentDifficultyLabel = "Random"
         self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord) 
         self.alerts = Alerts()
           
@@ -38,34 +37,20 @@ class GameSettings:
     def difficulty(self):
         clr_console()
         self.alerts.title("Diificulty")
-        print(f"Current Difficulty: {self.displayCurrentDifficulty()}\nSelect Difficulty Level\n[E]asy\n[M]edium\n[H]ard\n[R]andom\nGo [B]ack")
+        print(f"Select Difficulty Level\n[E]asy\n[M]edium\n[H]ard\n[R]andom")
         
         choice = input("\n> ").lower()
         
         if choice == 'e':
-            self.currentDifficultyLabel = "Easy"
             self.currentDifficultyReplacements = self.easyDifficulty(self.originalWord)
         elif choice == 'm':
-            self.currentDifficultyLabel = "Medium"
             self.currentDifficultyReplacements = self.mediumDifficulty(self.originalWord)
         elif choice == 'h':
-            self.currentDifficultyLabel = "Hard"
             self.currentDifficultyReplacements = self.hardDifficulty(self.originalWord)
-        elif choice == 'r':
-            self.currentDifficultyLabel = "Random"
-            self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord)
-        elif choice =='b':
-            return
         else:
-            self.currentDifficultyLabel = "Random"
             self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord)
-            print("Invalid difficulty... Set 'Random' as Default")
-            presstoCont()
             
         return self.currentDifficultyReplacements
-    
-    def displayCurrentDifficulty(self):
-        return self.currentDifficultyLabel
     
     def about(self):
         clr_console()

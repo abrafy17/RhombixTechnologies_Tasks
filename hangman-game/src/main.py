@@ -14,12 +14,11 @@ def newGame():
 def showSettings():
     clr_console()
     alerts.title("Settings")
-    print("[D]ifficulty\n[C]haracter\n[A]bout\nGo [B]ack")
+    print("[C]haracter\n[A]bout\nGo [B]ack")
         
     choice = input("\n> ").lower()
-    if choice == 'd':
-        game_settings.difficulty()
-    elif choice == 'c':
+   
+    if choice == 'c':
         pass # Not implemented Yets
     elif choice == 'a':
         game_settings.about()
