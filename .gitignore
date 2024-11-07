@@ -16,3 +16,4 @@ config.ini
 ENV_VAR.py
 oauth.json
 *.txt
+lib64
