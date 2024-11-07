@@ -50,4 +50,4 @@ if __name__ == "__main__":
         main()
         
     except KeyboardInterrupt:
-        print("Forcefully Quit")
+        print("\nForcefully Quit by User")

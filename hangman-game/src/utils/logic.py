@@ -19,7 +19,7 @@ def replaceLetters(word, num_replacements):
 
     return ''.join(wordToList)  
 
-def maskedWord(): # Shows only one time at start of the game
+def maskedWord():
     hiddenWord = replaceLetters(originalWord, game_settings.difficulty())
     return hiddenWord
     
@@ -27,38 +27,45 @@ def playGame():
     hiddenWord = maskedWord()
     attempts = 6
     currentWord = hiddenWord
+    guessed_letters = set()
 
     while attempts > 0:
         clr_console()
         alerts.title("Hangman")
         hangman.stageAttemps(attempts)
-        print(f"Try guessing the Word\n{currentWord}")
+        print(f"Attempts Remaining: {attempts}\nTry guessing the Word\n>>> {currentWord}")
         userGuess = input("Enter a letter or guess the entire word: ").lower()
         
         if userGuess == originalWord.lower():
-            print(f"Congratulations! You've guessed the word: {originalWord}")
-            input("Press Any Key to go Back to Main Menu")
+            clr_console()
+            alerts.title("Hurray!")
+            print(f"You've guessed the word: {originalWord}")
+            input("\n")
             break
         
         elif len(userGuess) == 1:
-            if userGuess in originalWord.lower() and userGuess not in currentWord.lower():
+            if userGuess in originalWord.lower() and userGuess not in guessed_letters:
+                guessed_letters.add(userGuess)
                 currentWord = ''.join(
-                    [originalWord[i] if originalWord[i].lower() == userGuess else currentWord[i] for i in range(len(originalWord))]
+                    [originalWord[i] if originalWord[i].lower() in guessed_letters else currentWord[i] for i in range(len(originalWord))]
                 )
                 print("Good Guess!")
-                time.sleep(2)
+                time.sleep(1)
                 
                 if currentWord.lower() == originalWord.lower():
-                    print("Well done! You've completed the word:", originalWord)
-                    input("Press Any Key to go Back to Main Menu")
+                    clr_console()
+                    alerts.title("Hurray!")
+                    print(f"You've completed the word: {originalWord}")
+                    input("Press any key to go back to main menu.\n")
                     break
             else:
                 print("Letter already revealed or not in the word.")
                 attempts -= 1
                 time.sleep(1)
         else:
-            print("Invalid input. Please guess a single letter or the entire word.")
-            time.sleep(2)
+            print("Oops! Wrong guess or invalid input.")
+            attempts -= 1
+            time.sleep(1)
 
         if attempts == 0:
             clr_console()
