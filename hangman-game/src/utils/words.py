@@ -1,5 +1,8 @@
 import random
+import json
 
 def getRandomWord():
-    word = ["Apple", "Mango", "Oragne", "Banana", "Programming"]
-    return random.choice(word)
+    with open("src/data/words.json", "r") as file:
+        data = json.load(file)
+        wordsList = data["words"]
+    return random.choice(wordsList)

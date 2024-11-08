@@ -1,15 +1,16 @@
 from utils.alerts import Alerts
 from settings.settings import GameSettings
-from utils.logic import playGame
+from utils.logic import GameLogic
 from utils.clr_console import clr_console, presstoCont
 
 import sys
 
 alerts = Alerts()
 game_settings = GameSettings()
+game = GameLogic()
 
 def newGame():
-    playGame()
+    game.playGame()
 
 def showSettings():
     clr_console()
@@ -37,7 +38,7 @@ def main():
         userChoice = input("\n> ").lower()
         
         if userChoice == 'n':
-            newGame() # Start the Game
+            newGame()
         elif userChoice == 's':
             showSettings()
         elif userChoice == 'e':

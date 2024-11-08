@@ -1,11 +1,11 @@
-from utils.globalVariable import originalWord
+from utils.words import getRandomWord
 from utils.alerts import Alerts
 from utils.clr_console import clr_console
 import random
 
 class GameSettings:
     def __init__(self):
-        self.originalWord = originalWord
+        self.originalWord = getRandomWord()
         self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord) 
         self.alerts = Alerts()
           
