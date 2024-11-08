@@ -1,57 +1,31 @@
 from utils.words import getRandomWord
 from utils.alerts import Alerts
-from utils.clr_console import clr_console
+from utils.clr_console import clr_console, presstoCont
 import random
 
 class GameSettings:
     def __init__(self):
         self.originalWord = getRandomWord()
-        self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord) 
         self.alerts = Alerts()
-          
-    def randomDifficulty(self, word):
-        numReplacements = random.randint(1, len(word) - 1)
-        return numReplacements
     
-    def easyDifficulty(self, word):
-        wordLen = len(word)
-        if wordLen >= 4:  
-            return 2
-        else:
-            return 1
-        
-    def mediumDifficulty(self, word):
-        wordLen = len(word)
-        if wordLen >= 4: 
-            return 3
-        else:
-            return 2
-        
-    def hardDifficulty(self, word):
-        wordLen = len(word)
-        if wordLen >= 4: 
-            return 4
-        else:
-            return 3
-
-    def difficulty(self):
+    def showSettings(self):
         clr_console()
-        self.alerts.title("Diificulty")
-        print(f"Select Difficulty Level\n[E]asy\n[M]edium\n[H]ard\n[R]andom")
-        
-        choice = input("\n> ").lower()
-        
-        if choice == 'e':
-            self.currentDifficultyReplacements = self.easyDifficulty(self.originalWord)
-        elif choice == 'm':
-            self.currentDifficultyReplacements = self.mediumDifficulty(self.originalWord)
-        elif choice == 'h':
-            self.currentDifficultyReplacements = self.hardDifficulty(self.originalWord)
-        else:
-            self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord)
+        self.alerts.title("Options")
+        print("[C]haracter\n[A]bout\nGo [B]ack")
             
-        return self.currentDifficultyReplacements
+        choice = input("\n> ").lower()
     
+        if choice == 'c':
+            pass # Not implemented Yets
+        elif choice == 'a':
+            self.about()
+        elif choice == 'b':
+            return 
+        else:
+            print("Invalid choice. Returning to main menu.")
+            presstoCont()
+            return
+         
     def about(self):
         clr_console()
         self.alerts.title("About")

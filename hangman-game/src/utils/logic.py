@@ -2,17 +2,57 @@ from utils.clr_console import clr_console, presstoCont
 from utils.words import getRandomWord
 from utils.alerts import Alerts
 from utils.character import Hangman
-from settings.settings import GameSettings
 import random
-import json
 import time
 
 
-class GameLogic():
+class Game():
     def __init__(self):
-        self.game_settings = GameSettings()
         self.hangman = Hangman()
         self.alerts = Alerts()
+
+    def randomDifficulty(self, word):
+        numReplacements = random.randint(1, len(word) - 1)
+        return numReplacements
+    
+    def easyDifficulty(self, word):
+        wordLen = len(word)
+        if wordLen >= 4:  
+            return 2
+        else:
+            return 1
+        
+    def mediumDifficulty(self, word):
+        wordLen = len(word)
+        if wordLen >= 4: 
+            return 3
+        else:
+            return 2
+        
+    def hardDifficulty(self, word):
+        wordLen = len(word)
+        if wordLen >= 4: 
+            return 4
+        else:
+            return 3
+
+    def difficulty(self):
+        clr_console()
+        self.alerts.title("Diificulty")
+        print(f"Select Difficulty Level\n[E]asy\n[M]edium\n[H]ard\n[R]andom")
+        
+        choice = input("\n> ").lower()
+        
+        if choice == 'e':
+            self.currentDifficultyReplacements = self.easyDifficulty(self.originalWord)
+        elif choice == 'm':
+            self.currentDifficultyReplacements = self.mediumDifficulty(self.originalWord)
+        elif choice == 'h':
+            self.currentDifficultyReplacements = self.hardDifficulty(self.originalWord)
+        else:
+            self.currentDifficultyReplacements = self.randomDifficulty(self.originalWord)
+            
+        return self.currentDifficultyReplacements
 
     def replaceLetters(self, word, num_replacements):
         wordToList = list(word)
@@ -24,7 +64,7 @@ class GameLogic():
         return ''.join(wordToList)  
 
     def maskedWord(self):
-        hiddenWord = self.replaceLetters(self.originalWord, self.game_settings.difficulty())
+        hiddenWord = self.replaceLetters(self.originalWord, self.difficulty())
         return hiddenWord
         
     def playGame(self):
