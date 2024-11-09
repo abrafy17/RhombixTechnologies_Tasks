@@ -1,15 +1,16 @@
 from utils.clr_console import clr_console, presstoCont
-from utils.words import getRandomWord
+from utils.words import Words
 from utils.alerts import Alerts
-from utils.character import Hangman
+from utils.character import Character
 import random
 import time
 
 
 class Game():
     def __init__(self):
-        self.hangman = Hangman()
+        self.character = Character()
         self.alerts = Alerts()
+        self.getWord = Words()
 
     def randomDifficulty(self, word):
         numReplacements = random.randint(1, len(word) - 1)
@@ -68,7 +69,12 @@ class Game():
         return hiddenWord
         
     def playGame(self):
-        self.originalWord = getRandomWord()
+        self.originalWord = self.getWord.getRandomWord()
+        if not self.originalWord:
+            self.alerts.title("Error")
+            print("Error Getting Word\nPlease Report it to Devs.")
+            time.sleep(0.2)
+            return
         hiddenWord = self.maskedWord()
         attempts = 6
         currentWord = hiddenWord
@@ -77,7 +83,7 @@ class Game():
         while attempts > 0:
             clr_console()
             self.alerts.title("Hangman")
-            self.hangman.stageAttemps(attempts)
+            self.character.stageAttempts(attempts)
             print(f"Attempts Remaining: {attempts}\nTry guessing the Word\n>>> {currentWord}")
             userGuess = input("Enter a letter or guess the entire word: ").lower()
             
@@ -115,6 +121,6 @@ class Game():
             if attempts == 0:
                 clr_console()
                 self.alerts.title("Game Over")
-                self.hangman.stageAttemps(attempts)
+                self.character.stageAttemps(attempts)
                 print(f"The correct word was: {self.originalWord}")
                 presstoCont()

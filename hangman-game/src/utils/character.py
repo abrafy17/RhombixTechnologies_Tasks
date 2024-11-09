@@ -1,87 +1,31 @@
-class Hangman:
+from settings.settings import GameSettings
+
+class Character:
     def __init__(self):
-        pass
-    
-    def stageAttemps(self, attempts):
+        self.settings = GameSettings()
+
+    def stageAttempts(self, attempts):
         stages = {
-            6: self.stage_start,
-            5: self.stage_one,
-            4: self.stage_two,
-            3: self.stage_three,
-            2: self.stage_four,
-            1: self.stage_five,
-            0: self.stage_dead
+            6: lambda: self.hangman(0),
+            5: lambda: self.hangman(1),
+            4: lambda: self.hangman(2),
+            3: lambda: self.hangman(3),
+            2: lambda: self.hangman(4),
+            1: lambda: self.hangman(5),
+            0: lambda: self.hangman(6),
         }
         
-        stage_func = stages.get(attempts, self.stage_dead)
+        stage_func = stages.get(attempts, lambda: self.hangman(6))
         stage_func()
-        
-    def stage_start(self):
-        hangman = """
-                +---+
-                    |
-                    |
-                    |
-                  ===
-                  """
-        print(hangman)
-    
-    def stage_one(self):
-        hangman = """
-                +---+
-                O   |
-                    |
-                    |
-                  ===
-                  """
-        print(hangman)
-    
-    def stage_two(self):
-        hangman = """
-                +---+
-                O   |
-                |   |
-                    |
-                  ===
-                  """
-        print(hangman)
-    
-    def stage_three(self):
-        hangman = """
-                +---+
-                 O  |
-                /|  |
-                    |
-                  ===
-                  """
-        print(hangman)
-    
-    def stage_four(self):
-        hangman = """
-                +---+
-                 O  |
-                /|\ |
-                    |
-                  ===
-                  """
-        print(hangman)
-    
-    def stage_five(self):
-        hangman = """
-                +---+
-                 O  |
-                /|\ |
-                /   |
-                  ===
-                  """
-        print(hangman)
-    
-    def stage_dead(self):
-        hangman = """
-                +---+
-                 O  |
-                /|\ |
-                / \ |
-                  ===
-                  """
-        print(hangman)
+
+    def hangman(self, stage):
+        hangmanStages = [
+            "+---+\n    |\n    |\n    |\n  ===",
+            "+---+\nO   |\n    |\n    |\n  ===",
+            "+---+\nO   |\n|   |\n    |\n  ===",
+            "+---+\nO   |\n/|  |\n    |\n  ===",
+            "+---+\nO   |\n/|\\ |\n    |\n  ===",
+            "+---+\nO   |\n/|\\ |\n/   |\n  ===",
+            "+---+\nO   |\n/|\\ |\n/ \\ |\n  ==="
+        ]
+        print(hangmanStages[stage])

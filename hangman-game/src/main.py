@@ -9,6 +9,7 @@ game_settings = GameSettings()
 game = Game()
 
 def newGame():
+    game_settings.isOnline()
     game.playGame()
 
 def main():
@@ -16,6 +17,8 @@ def main():
         clr_console()
         alerts.title("Hangman")
         print(f"Start [N]ew Game\n[O]ptions\n[E]xit to Desktop")
+        
+            
         userChoice = input("\n> ").lower()
         
         if userChoice == 'n':
