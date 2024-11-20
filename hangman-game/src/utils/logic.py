@@ -121,6 +121,6 @@ class Game():
             if attempts == 0:
                 clr_console()
                 self.alerts.title("Game Over")
-                self.character.stageAttemps(attempts)
+                self.character.stageAttempts(attempts)
                 print(f"The correct word was: {self.originalWord}")
                 presstoCont()

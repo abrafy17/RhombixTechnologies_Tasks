@@ -10,10 +10,10 @@ class GameSettings:
         try:
             print("Checking Your Internet Connection...")
             socket.create_connection(("8.8.8.8", 53), timeout=2)
-            status = True
+            return True
         
         except OSError:
-            status = False
+            return False
         
     def showSettings(self):
         clr_console()

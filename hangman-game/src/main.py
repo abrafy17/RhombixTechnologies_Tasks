@@ -6,10 +6,11 @@ import sys
 
 alerts = Alerts()
 game_settings = GameSettings()
+
+ 
 game = Game()
 
 def newGame():
-    game_settings.isOnline()
     game.playGame()
 
 def main():
