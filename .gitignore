@@ -15,5 +15,8 @@ data.db
 config.ini
 ENV_VAR.py
 oauth.json
-*.txt
 lib64
+Lib/
+Scripts/
+*.spec
+build/
