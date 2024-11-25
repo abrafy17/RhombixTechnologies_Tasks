@@ -22,6 +22,13 @@ Command:
 
 ### Linux
 
-```pyinstaller --onefile -n hangman src/main.py --icon assets/icon.ico --add-data "{path to your GitHub directory}/RhombixTechnologies_Tasks/hangman-game/lib/python3.12/site-packages/pyfiglet/fonts:pyfiglet/fonts" --add-data "{path to your GitHub directory}/RhombixTechnologies_Tasks/hangman-game/src/data/:data/"```
+```pyinstaller --onefile -n hangman src/main.py --icon assets/icon.ico --add-data "{PATH_TO_YOUR_GITHUB_DIR.}/RhombixTechnologies_Tasks/hangman-game/lib/python3.12/site-packages/pyfiglet/fonts:pyfiglet/fonts" --add-data "{PATH_TO_YOUR_GITHUB_DIR}/RhombixTechnologies_Tasks/hangman-game/src/utils/data:data";```
 
 ### Windows
+
+## Screenshots
+
+![main](screenshots/main-screen.png)
+
+**[more](screenshots/)**
+

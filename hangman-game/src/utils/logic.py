@@ -40,7 +40,7 @@ class Game():
 
     def difficulty(self):
         clr_console()
-        self.alerts.title("Diificulty")
+        self.alerts.title("Difficulty")
         print(f"Select Difficulty Level\n[E]asy\n[M]edium\n[H]ard\n[R]andom")
         
         choice = input("\n> ").lower()

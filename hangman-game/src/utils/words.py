@@ -1,4 +1,5 @@
 from settings.settings import GameSettings
+from utils.path_helper import getResourcePath
 import requests
 import random
 import json
@@ -33,11 +34,12 @@ class Words:
 
     def offlineWords(self):
         try:
-            with open("src/data/words.json", "r") as file:
+            wordsPath = getResourcePath('data/words.json')
+            with open(wordsPath, "r") as file:
                 data = json.load(file)
                 wordsList = data["words"]
             return random.choice(wordsList)
     
         except FileNotFoundError:
-            raise Exception("Offline words file is not found")
+            raise Exception(f"Offline words file is not found at: {wordsPath}")
        
