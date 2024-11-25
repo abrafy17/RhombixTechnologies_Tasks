@@ -5,7 +5,7 @@ class Database:
     def __init__(self):
         pass
     
-    def setup_database(self, ):
+    def setup_database(self):
         if not os.path.exists('voice-assistant/db'):
             os.makedirs('voice-assiatant/db')
 
