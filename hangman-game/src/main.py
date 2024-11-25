@@ -5,10 +5,9 @@ from utils.clr_console import clr_console
 import sys
 
 alerts = Alerts()
-game_settings = GameSettings()
-
- 
+gameSettings = GameSettings()
 game = Game()
+game.setSettings(gameSettings)
 
 def newGame():
     game.playGame()
@@ -25,7 +24,7 @@ def main():
         if userChoice == 'n':
             newGame()
         elif userChoice == 'o':
-            game_settings.showSettings()
+            gameSettings.showSettings()
         elif userChoice == 'e':
             sys.exit()
         else:

@@ -8,6 +8,7 @@ import time
 
 class Game():
     def __init__(self):
+        self.settings = None
         self.character = Character()
         self.alerts = Alerts()
         self.getWord = Words()
@@ -67,14 +68,21 @@ class Game():
     def maskedWord(self):
         hiddenWord = self.replaceLetters(self.originalWord, self.difficulty())
         return hiddenWord
+    
+    def setSettings(self, settings):
+        self.settings = settings
         
     def playGame(self):
         self.originalWord = self.getWord.getRandomWord()
         if not self.originalWord:
             self.alerts.title("Error")
-            print("Error Getting Word\nPlease Report it to Devs.")
+            print("Error Getting Word!\nPlease Report it to Devs.")
             time.sleep(0.2)
             return
+        
+        currentChar = self.settings.getCurrentCharacter()
+        self.character.setCharacter(currentChar)
+        
         hiddenWord = self.maskedWord()
         attempts = 6
         currentWord = hiddenWord
