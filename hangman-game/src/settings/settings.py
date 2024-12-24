@@ -76,7 +76,7 @@ class GameSettings:
     def about(self):
         clr_console()
         self.alerts.title("About")
-        print("Made With \U0001F634")
+        print("A CLI-based word-guessing game, a classic known as Hangman.\nGuess words letter by letter or whole word at once\nChoose different characters to show\n\nGithub: https://github.com/abrafy17/RhombixTechnologies_Tasks/tree/main/hangman-game")
         input("")
         
     def getCurrentCharacter(self):
